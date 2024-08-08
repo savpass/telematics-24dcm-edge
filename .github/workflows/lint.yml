@@ -21,16 +21,16 @@ jobs:
         with:
           java-version: 11.0.17   
           distribution: 'adopt'
-          cache: 'gradle'
-      - name: Build cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle/caches
-          key: gradle-caches-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts') }}
-          restore-keys: |
-            gradle-caches-${{ runner.os }}-
-      - name: Lint code
-        run: ./gradlew check
+          # cache: 'gradle'
+      # - name: Build cache
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.gradle/caches
+      #     key: gradle-caches-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts') }}
+      #     restore-keys: |
+      #       gradle-caches-${{ runner.os }}-
+      # - name: Lint code
+      #   run: ./gradlew check
 
       - name: Build and Lint
         uses: gradle/gradle-build-action@v2
