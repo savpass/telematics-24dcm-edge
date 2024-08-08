@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 11.0.17   
-          distribution: 'Temurin'  # Choose your preferred distribution
+          distribution: 'adopt'
           cache: 'gradle'
       - name: Build cache
         uses: actions/cache@v3
