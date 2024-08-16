@@ -13,3 +13,41 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "build-logic"
+
+
+plugins {
+    kotlin("jvm") version "1.9.0"
+    id("jacoco")
+}
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "jacoco")
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation(kotlin("test"))
+        testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
+    }
+
+    tasks.test {
+        useJUnitPlatform() // Use JUnit 5
+        finalizedBy(tasks.jacocoTestReport) // Ensure JaCoCo report is generated after tests
+    }
+
+    tasks.jacocoTestReport {
+        dependsOn(tasks.test)
+
+        reports {
+            xml.required.set(true) // Generate XML report for CI tools
+            html.required.set(true) // Generate HTML report for easy viewing
+        }
+    }
+}
